@@ -26,11 +26,7 @@ import torchvision.transforms.functional as TF
 
 import supervision as sv
 #from yolov6.utils.events import LOGGER, load_yaml
-yolov6_path = os.getenv("YOLOV6_location")
-if yolov6_path:
-    sys.path.append(yolov6_path)
-else:
-    print("Erreur : La variable YOLOv6_location n'est pas définie dans le fichier .env")
+sys.path.append(r"/home/fenaux/Documents/YOLOv6")
 import yolov6 as bid # trick to avoid Key Eroor on second runtime
 from yolov6.layers.common import DetectBackend
 from yolov6.utils.nms import non_max_suppression
@@ -38,12 +34,7 @@ from yolov6.core.inferer import Inferer
 
 from typing import List, Optional
 
-athle_path = os.getenv("athle_location")
-if athle_path: 
-    sys.path.append(athle_path)
-else:
-    print("Erreur : La variable athle_location n'est pas définie dans le fichier .env")
-
+sys.path.append(r"/home/fenaux/Documents/athle")
 from yolo.yolov6_utils import check_img_size, process_image_array
 
 video_in = "../ffb/CFBB vs UNION TARBES LOURDES PYRENEES BASKET Men's Pro Basketball - Tactical.mp4"
@@ -67,7 +58,7 @@ if supervis:
         text_thickness=1,
     )
     
-    PLAYER_DETECTION_MODEL_PATH = '/content/sports-main/examples/soccer/data/football-player-detection.pt'
+    PLAYER_DETECTION_MODEL_PATH = '/home/fenaux/Documents/foot/sports-main/examples/soccer/data/football-player-detection.pt'
     #sys.path.append(r"/home/fenaux/Documents/foot/sports-main/examples")
     
     #from soccer.main import run_player_detection
@@ -132,7 +123,7 @@ def func_box(video_name: str, save_box_name: str, start_frame: int, end_frame: i
     cuda = device != 'cpu' and torch.cuda.is_available()
     device = torch.device('cuda:0' if cuda else 'cpu')
     
-    local_checkpoint = yolov6_path+"/{checkpoint}.pt"
+    local_checkpoint = f"/home/fenaux/Documents/YOLOv6/{checkpoint}.pt"
     
     model = DetectBackend(local_checkpoint, device=device)
     stride = model.stride
